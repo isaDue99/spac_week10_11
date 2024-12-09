@@ -1,0 +1,25 @@
+services:
+  db:
+    restart: unless-stopped
+    hostname: db
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db-volume:/var/lib/mysql
+  # api:
+  #   restart: unless-stopped
+  #   build: .
+  #   ports:
+  #     - "50050:50050"
+  #   environment:
+  #     DOCKER: true
+  #     BACKEND_HOST: 0.0.0.0
+  #     BACKEND_PORT: 50050
+  #     DB_USER: root
+  #     DB_PASSWORD: root
+  #     DB_HOST: db
+  #     DB_PORT: 3306
+
+volumes:
+  db-volume:
