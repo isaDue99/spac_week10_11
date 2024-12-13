@@ -1,69 +1,98 @@
 # module to handle database connection
 
-import os
 import mysql.connector as sql
+import database_config as db_conf
+
+
+def get_adapter() -> "AdapterI":
+    """Return the appropriate database adapter class (subclass of AdapterI interface) according to database_config.SYSTEM setting"""
+    if db_conf.SYSTEM == "MySQL":
+        return MySQLAdapter()
+    else:
+        raise Exception(f"database_configuration.SYSTEM setting (=\"{db_conf.SYSTEM}\") not recognized")
 
 
 class AdapterI:
     """An \"interface\" for the operations that specific implementations of database connections should support. Functionality is implemented by subclasses"""
-    # TODO does this selection of functions make sense for an interface? 
-    # namely create, update and delete, if they all take sql statements as input then they dont really need to be separate functions...
-
-    def find(self, selector):
-        """Returns 1 item matching SQL selector"""
+    
+    def find(self, query):
+        """Returns one item matching SQL query"""
         pass
 
-    def find_all(self, selector):
-        """Returns all items matching SQL selector"""
+    def find_all(self, query):
+        """Returns all items matching SQL query"""
         pass
 
-    def create(self, query):
-        """Creates a new row using SQL query"""
-        pass
-
-    def update(self, query):
-        """Updates items using SQL query"""
-        pass
-
-    def delete(self, selector):
-        """Deletes items matching SQL selector"""
+    def execute(self, query):
+        """Executes (and commits) the SQL statement"""
         pass
 
 
 class Database:
-    """Represents a connection to a database"""
+    """
+    Represents a connection to a database. 
+    Automatically adapts to the database system in use, as indicated by the database_config.SYSTEM setting.
+    """
 
-    def __init__(self, adapter: AdapterI):
-        """
-        Constructor for Database objects. 
-        
-        (adapter) provides the specific implementations of common database operations, depending on what type of database is in use. 
-        For example, if the database is MySQL, then (adapter) should be an instance of the MySQLAdapter class.
-        """
-        self.client = adapter()
+    def __init__(self):
+        self.client = get_adapter()
 
-    def find(self, params):
+    def find_params(self, table, params: dict):
         """
-        Find a product in database given (params). TODO
+        Find rows in table that match the given dict (params), of the shape {"column name": (value to search for)}.
         """
         # construct sql statement from params
-        query = params
+
+        # start the query
+        query = f"SELECT * FROM {table} WHERE "
+
+        # first key we add doesn't need AND-clause
+        pop_key, pop_value = params.popitem()
+        query += f"{pop_key}={pop_value} "
+        
+        # then add any subsequent params as AND-clauses
+        for key, value in params.items():
+            if type(value) is str:
+                query += f"AND {key}=\"{value}\" "
+            else:
+                query += f"AND {key}={value} "
+        query += ";"
+
+        print(query)
 
         # pass this query to adapter
+        return self.client.find_all(query)
+    
+    def find_param(self, table, key, value):
+        """
+        Find a product in (table) with value (value) in column (key)
+        """
+        # SQL needs string values to be enclosed in quotes, but numeric values must be free
+        if type(value) is str:
+            query = f"SELECT * FROM {table} WHERE {key}=\"{value}\";"
+        else:
+            query = f"SELECT * FROM {table} WHERE {key}={value};"
+        return self.client.find_all(query)
+    
+    def find_id(self, table, id):
+        """
+        Find a product in (table) given (id)
+        """
+        query = f"SELECT * FROM {table} WHERE ID={id};"
         return self.client.find(query)
     
     def get_table(self, table):
         """
         Get absolutely every row in a table. Equivalent to "SELECT * FROM (table)"
         """
-        query = f"SELECT * FROM {table}"
+        query = f"SELECT * FROM {table};"
 
         return self.client.find_all(query)
     
     def test_add(self):
-        query = f"INSERT INTO Products (ID, Type, Name, Price, Currency, Stock) VALUES (1001, 'Test2', 'Test Product 2', 69, 'SEK', 17)"
+        query = f"INSERT INTO Products (ID, Type, Name, Price, Currency, Stock) VALUES (1002, 'Test3', 'Test Product 3', 69, 'SEK', 17)"
 
-        return self.client.create(query)
+        return self.client.execute(query)
     
     # TODO the rest etc..
 
@@ -72,12 +101,8 @@ class MySQLAdapter(AdapterI):
     """Connection to a MySQL database"""
 
     def __init__(self):
-        user = "root"
-        # password = os.environ.get("MYSQL_ROOT_PASSWORD") # this wont work since server isnt in the docker container
-        password = "root" # hardcoded instead
-        database = "fullstack_db"
-        self.conn = sql.connect(user=user, password=password)
-        self._init_db_and_tables(database)
+        self.conn = sql.connect(user=db_conf.USERNAME, password=db_conf.PASSWORD)
+        self._init_db_and_tables(db_conf.DATABASE_NAME)
     
 
     # messy section, initially copied from https://dev.mysql.com/doc/connector-python/en/connector-python-example-ddl.html
@@ -87,69 +112,11 @@ class MySQLAdapter(AdapterI):
         """
         Connects to database named (database), creating a new one if it doesnt exist. 
         Then creates tables on this database if they dont already exist
-        """
-
-        # TODO move these schemas into a separate file
-        TABLES = {}
-        
-        # entity-value model for products with differing types (and properties)
-        TABLES['Products'] = (
-            "CREATE TABLE `Products` ("
-            "   `ID` int NOT NULL AUTO_INCREMENT,"
-            "   `Type` varchar(256) NOT NULL," # arbritrary size limit yay
-            "   `Name` varchar(40) NOT NULL,"
-            "   `Price` float NOT NULL,"
-            "   `Currency` varchar(3) NOT NULL,"
-            "   `Stock` int NOT NULL,"
-            "   PRIMARY KEY (`ID`)"
-            ") ENGINE=InnoDB")
-        
-        TABLES['Properties'] = (
-            "CREATE TABLE `Properties` ("
-            "   `ProductID` int NOT NULL,"
-            "   `Name` varchar(256) NOT NULL,"
-            "   `Value` varchar(256) NOT NULL,"
-            "   CONSTRAINT PK_Properties PRIMARY KEY (`ProductID`, `Name`),"
-            "   FOREIGN KEY (ProductID) REFERENCES Products(ID)"
-            ") ENGINE=InnoDB")
-        
-        TABLES['ProductImages'] = (
-            "CREATE TABLE `ProductImages` ("
-            "   `ProductID` int NOT NULL,"
-            "   `Image` blob,"
-            # no primary key because a single product could conceivably have more than one picture
-            "   FOREIGN KEY (ProductID) REFERENCES Products(ID)"
-            ") ENGINE=InnoDB")
-        
-        TABLES['Customers'] = ( # represents a customer
-            "CREATE TABLE `Customers` ("
-            "   `ID` int NOT NULL AUTO_INCREMENT,"
-            "   `FirstName` varchar(40),"
-            "   `LastName` varchar(40),"
-            "   PRIMARY KEY (`ID`)"
-            ") ENGINE=InnoDB")
-        
-        TABLES['Orders'] = ( # represents an order a customer has placed
-            "CREATE TABLE `Orders` ("
-            "   `ID` int NOT NULL AUTO_INCREMENT,"
-            "   `CustomerID` int NOT NULL,"
-            "   PRIMARY KEY (`ID`),"
-            "   FOREIGN KEY (CustomerID) REFERENCES Customers(ID)"
-            ") ENGINE=InnoDB")
-        
-        TABLES['OrderDetails'] = ( # represents the amount of each product in an order
-            "CREATE TABLE `OrderDetails` ("
-            "   `OrderID` int NOT NULL,"
-            "   `ProductID` int NOT NULL,"
-            "   `Quantity` int NOT NULL,"
-            "   CONSTRAINT PK_OrderDetails PRIMARY KEY (`OrderID`, `ProductID`),"
-            "   FOREIGN KEY (OrderID) REFERENCES Orders(ID),"
-            "   FOREIGN KEY (ProductID) REFERENCES Products(ID)"
-            ") ENGINE=InnoDB")
+        """        
         
         cur = self.conn.cursor()
         self._set_db(cur, database)
-        self._create_tables(cur, TABLES)
+        self._create_tables(cur, db_conf.TABLES)
         cur.close()
 
 
@@ -192,39 +159,23 @@ class MySQLAdapter(AdapterI):
     ###
     # back to regularly scheduled functions
 
-    def find(self, selector):
+
+    def find(self, query):
         cur = self.conn.cursor()
-        cur.execute(selector)
+        cur.execute(query)
         result = cur.fetchone()
         cur.close()
         return result
     
-    def find_all(self, selector):
+    def find_all(self, query):
         cur = self.conn.cursor()
-        cur.execute(selector)
+        cur.execute(query)
         result = cur.fetchall()
         cur.close()
         return result
 
-    def create(self, query):
-        self._alter_db(query)
-
-    def update(self, query):
-        self._alter_db(query)
-
-    def delete(self, selector):
-        self._alter_db(selector)
-
-    def _alter_db(self, query):
-        """
-        Helper function to avoid code-duplication: executes database-altering (query) and commits changes.
-        create(), update() and delete() are identical implementation-wise, 
-        but must be kept as separate functions to comply with AdapterI contract.
-        """
+    def execute(self, query):
         cur = self.conn.cursor()
         cur.execute(query)
-        # TODO add try-except before commit() is called?
         self.conn.commit()
         cur.close()
-
-

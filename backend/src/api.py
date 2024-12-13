@@ -1,29 +1,44 @@
 # module exposing endpoints to interact with database, which is done through connectors in backend/database.py
 
-from database import Database, MySQLAdapter
+from database import Database
 
-from flask import Flask, json
+from flask import Flask, json, request
 
 api = Flask(__name__)
 
-### Routes for operations:
-#   GET             /(products? items?) = find_all()
-#   GET             /(^)/<id: int>      = find(id)
-#   POST            /(^)                = create(**stuff)
-#   PUT(PATCH?)     /(^)/<id: int>      = update(id, **stuff)
-#   DELETE          /(^)/<id: int>      = delete(id)
+##### Routes for operations:
+### Product-associated:
+#   GET             /products                       = find_all()
+#   GET             /products/<id: int>             = find(id)
+#   GET             /products/<search term: str>    = find_all(ids that have term as a value in Products or Properties)
+#   POST            /products                       = create(**stuff)
+#   PUT(PATCH?)     /products/<id: int>             = update(id, **stuff)
+#   DELETE          /products/<id: int>             = delete(id)
 
-@api.route("/", methods=["GET"])
-def test():
-    # testing whether we can get all rows in products table
-    payload = Database(MySQLAdapter).get_table("Products")
+### Customer-associated: analogous to products, but with base url as /customers/... instead
+### same for orders at /orders/...
 
+@api.route("/<string:table>", methods=["GET"])
+def get_table(table: str):
+    payload = Database().get_table(table)
+    return json_response(payload)
+
+@api.route("/<string:table>/id=<int:id>", methods=["GET"])
+def find_id(table: str, id: int):
+    payload = Database().find_id(table, id)
+    return json_response(payload)
+
+@api.route("/<string:table>/where", methods=["GET"])
+def find_params(table: str):
+    args = request.args.to_dict()
+    print(args)
+    payload = Database().find_params(table, args)
     return json_response(payload)
 
 @api.route("/testadd", methods=["GET"])
 def test_add():
     # quick and dirty adding a basic product
-    payload = Database(MySQLAdapter).test_add()
+    payload = Database().test_add()
 
     return json_response(payload)
 

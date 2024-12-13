@@ -1,7 +1,5 @@
 # module providing classes to structure data being sent to and received from database
 
-# TODO TODO TODO brain is cooked....
-
 # ------------ Products ------------ 
 
 class ProductImage: 
