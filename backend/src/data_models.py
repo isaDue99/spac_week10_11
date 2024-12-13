@@ -4,45 +4,46 @@
 
 # ------------ Products ------------ 
 
-class ProductImage:
-    # TODO
-    file : str
+class ProductImage: 
+    id : int # product id, FK
+    image_path : str        # idk
+    image_binary : bytes    # idk
 
 class Product:
-    id : int
+    id : int # PK
     name : str
-    # price : float
-    # currency : str
-    price : dict[str, float] # {'DKK' : 19.95, 'EUR' : 2, 'USD' : 2.75}
+    price : float
+    currency : str
+    # price : dict[str, float] # {'DKK' : 19.95, 'EUR' : 2, 'USD' : 2.75}
     stock : int
     image : ProductImage
 
-class Food(Product):
-    ingredients : list[str]
+class Cereal(Product):
+    # ingredients : list[str]
     unit_weight : int
     
     # nutritional info (per 100 g)
     calories : int
-    protein : int
-    fat : int
-    carbs : int
-    sugars : int
-    fiber : int
-    sodium : int
-    potassium : int
-    vitamins : int
-
-class Cereal(Food):
-    mascot : str
+    protein : float
+    fat : float
+    carbs : float
+    sugars : float
+    fiber : float
+    sodium : float
+    potassium : float
+    vitamins : float
 
 
-# ------------ Customer ------------ 
+# ------------ Customers and Orders ------------ 
 
 class Customer:
     id : int
+    first_name : str
+    last_name : str
     
 class Order:
-    customer_id : int
+    id : int # id of the order, PK
+    customer_id : int # FK
     cart : dict[int, int] # {(product id) : (amount bought), (other product id) : etc..}
 
     def total_price(self):

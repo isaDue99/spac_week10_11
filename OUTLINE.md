@@ -32,7 +32,7 @@ run mysql db/flask api in docker, react frontend? or flask frontend if too scary
 
 ### week 1
 
-**mon:** get project set up: (db server running, get all (1) items in products table, show in frontend)?
+**mon:** X get project set up: (db server running, get all (1) items in products table, show in frontend)?
 
 **tues:** db: populate with data, api: CRUD
 

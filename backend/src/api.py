@@ -20,6 +20,13 @@ def test():
 
     return json_response(payload)
 
+@api.route("/testadd", methods=["GET"])
+def test_add():
+    # quick and dirty adding a basic product
+    payload = Database(MySQLAdapter).test_add()
+
+    return json_response(payload)
+
 # fully copied from https://developer.okta.com/blog/2018/12/20/crud-app-with-python-flask-react
 def json_response(payload, status=200):
     """Wraps response from database nicely into json object, with http-like status code and header"""

@@ -6,6 +6,8 @@ import mysql.connector as sql
 
 class AdapterI:
     """An \"interface\" for the operations that specific implementations of database connections should support. Functionality is implemented by subclasses"""
+    # TODO does this selection of functions make sense for an interface? 
+    # namely create, update and delete, if they all take sql statements as input then they dont really need to be separate functions...
 
     def find(self, selector):
         """Returns 1 item matching SQL selector"""
@@ -58,6 +60,11 @@ class Database:
 
         return self.client.find_all(query)
     
+    def test_add(self):
+        query = f"INSERT INTO Products (ID, Type, Name, Price, Currency, Stock) VALUES (1001, 'Test2', 'Test Product 2', 69, 'SEK', 17)"
+
+        return self.client.create(query)
+    
     # TODO the rest etc..
 
 
@@ -66,7 +73,8 @@ class MySQLAdapter(AdapterI):
 
     def __init__(self):
         user = "root"
-        password = os.environ.get("MYSQL_ROOT_PASSWORD")
+        # password = os.environ.get("MYSQL_ROOT_PASSWORD") # this wont work since server isnt in the docker container
+        password = "root" # hardcoded instead
         database = "fullstack_db"
         self.conn = sql.connect(user=user, password=password)
         self._init_db_and_tables(database)
@@ -81,21 +89,62 @@ class MySQLAdapter(AdapterI):
         Then creates tables on this database if they dont already exist
         """
 
+        # TODO move these schemas into a separate file
         TABLES = {}
+        
+        # entity-value model for products with differing types (and properties)
         TABLES['Products'] = (
             "CREATE TABLE `Products` ("
-            "   `name` varchar(40) NOT NULL,"
-            "   `price` float NOT NULL,"
-            "   `stock` int NOT NULL,"
-            "   `weight` int NOT NULL,"
-            "   `calories` int NOT NULL,"
-            "   `protein` int NOT NULL,"
-            "   `fat` int NOT NULL,"
-            "   `carbs` int NOT NULL,"
-            "   `sugars` int NOT NULL,"
-            "   `fiber` int NOT NULL,"
-            "   `vitamins` int NOT NULL,"
-            "   PRIMARY KEY (`name`)"
+            "   `ID` int NOT NULL AUTO_INCREMENT,"
+            "   `Type` varchar(256) NOT NULL," # arbritrary size limit yay
+            "   `Name` varchar(40) NOT NULL,"
+            "   `Price` float NOT NULL,"
+            "   `Currency` varchar(3) NOT NULL,"
+            "   `Stock` int NOT NULL,"
+            "   PRIMARY KEY (`ID`)"
+            ") ENGINE=InnoDB")
+        
+        TABLES['Properties'] = (
+            "CREATE TABLE `Properties` ("
+            "   `ProductID` int NOT NULL,"
+            "   `Name` varchar(256) NOT NULL,"
+            "   `Value` varchar(256) NOT NULL,"
+            "   CONSTRAINT PK_Properties PRIMARY KEY (`ProductID`, `Name`),"
+            "   FOREIGN KEY (ProductID) REFERENCES Products(ID)"
+            ") ENGINE=InnoDB")
+        
+        TABLES['ProductImages'] = (
+            "CREATE TABLE `ProductImages` ("
+            "   `ProductID` int NOT NULL,"
+            "   `Image` blob,"
+            # no primary key because a single product could conceivably have more than one picture
+            "   FOREIGN KEY (ProductID) REFERENCES Products(ID)"
+            ") ENGINE=InnoDB")
+        
+        TABLES['Customers'] = ( # represents a customer
+            "CREATE TABLE `Customers` ("
+            "   `ID` int NOT NULL AUTO_INCREMENT,"
+            "   `FirstName` varchar(40),"
+            "   `LastName` varchar(40),"
+            "   PRIMARY KEY (`ID`)"
+            ") ENGINE=InnoDB")
+        
+        TABLES['Orders'] = ( # represents an order a customer has placed
+            "CREATE TABLE `Orders` ("
+            "   `ID` int NOT NULL AUTO_INCREMENT,"
+            "   `CustomerID` int NOT NULL,"
+            "   PRIMARY KEY (`ID`),"
+            "   FOREIGN KEY (CustomerID) REFERENCES Customers(ID)"
+            ") ENGINE=InnoDB")
+        
+        TABLES['OrderDetails'] = ( # represents the amount of each product in an order
+            "CREATE TABLE `OrderDetails` ("
+            "   `OrderID` int NOT NULL,"
+            "   `ProductID` int NOT NULL,"
+            "   `Quantity` int NOT NULL,"
+            "   CONSTRAINT PK_OrderDetails PRIMARY KEY (`OrderID`, `ProductID`),"
+            "   FOREIGN KEY (OrderID) REFERENCES Orders(ID),"
+            "   FOREIGN KEY (ProductID) REFERENCES Products(ID)"
             ") ENGINE=InnoDB")
         
         cur = self.conn.cursor()
@@ -158,13 +207,13 @@ class MySQLAdapter(AdapterI):
         return result
 
     def create(self, query):
-        self._alter_db(self, query)
+        self._alter_db(query)
 
     def update(self, query):
-        self._alter_db(self, query)
+        self._alter_db(query)
 
     def delete(self, selector):
-        self._alter_db(self, selector)
+        self._alter_db(selector)
 
     def _alter_db(self, query):
         """
