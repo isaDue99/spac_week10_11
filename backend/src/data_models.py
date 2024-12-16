@@ -4,20 +4,18 @@
 
 class ProductImage: 
     id : int # product id, FK
-    image_path : str        # idk
-    image_binary : bytes    # idk
+    image_path : str
 
 class Product:
     id : int # PK
     name : str
     price : float
     currency : str
-    # price : dict[str, float] # {'DKK' : 19.95, 'EUR' : 2, 'USD' : 2.75}
+    # price : dict[str, float] # {'DKK' : 19.95, 'EUR' : 2, 'USD' : 2.75} # this would be smart
     stock : int
     image : ProductImage
 
 class Cereal(Product):
-    # ingredients : list[str]
     unit_weight : int
     
     # nutritional info (per 100 g)

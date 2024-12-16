@@ -37,64 +37,92 @@ class Database:
     def __init__(self):
         self.client = get_adapter()
 
-    def find_params(self, table, params: dict):
+    def find_by_params(self, table, params: dict):
         """
-        Find rows in table that match the given dict (params), of the shape {"column name": (value to search for)}.
+        Find rows in (table) that match the given dict (params), of the shape {"column name": (value to search for)}.
         """
+
         # construct sql statement from params
-
-        # start the query
         query = f"SELECT * FROM {table} WHERE "
-
-        # first key we add doesn't need AND-clause
-        pop_key, pop_value = params.popitem()
-        query += f"{pop_key}={pop_value} "
-        
-        # then add any subsequent params as AND-clauses
-        for key, value in params.items():
-            if type(value) is str:
-                query += f"AND {key}=\"{value}\" "
-            else:
-                query += f"AND {key}={value} "
+        query += self._construct_sql_list(params, " AND ", mode="=")
         query += ";"
 
-        print(query)
-
         # pass this query to adapter
-        return self.client.find_all(query)
-    
-    def find_param(self, table, key, value):
-        """
-        Find a product in (table) with value (value) in column (key)
-        """
-        # SQL needs string values to be enclosed in quotes, but numeric values must be free
-        if type(value) is str:
-            query = f"SELECT * FROM {table} WHERE {key}=\"{value}\";"
-        else:
-            query = f"SELECT * FROM {table} WHERE {key}={value};"
-        return self.client.find_all(query)
-    
-    def find_id(self, table, id):
-        """
-        Find a product in (table) given (id)
-        """
-        query = f"SELECT * FROM {table} WHERE ID={id};"
-        return self.client.find(query)
-    
+        return self.client.find_all(query)          
+
     def get_table(self, table):
         """
-        Get absolutely every row in a table. Equivalent to "SELECT * FROM (table)"
+        Get absolutely every row in (table). Basically "SELECT * FROM (table)"
         """
-        query = f"SELECT * FROM {table};"
 
+        query = f"SELECT * FROM {table};"
         return self.client.find_all(query)
     
-    def test_add(self):
-        query = f"INSERT INTO Products (ID, Type, Name, Price, Currency, Stock) VALUES (1002, 'Test3', 'Test Product 3', 69, 'SEK', 17)"
+    def create(self, table, body: dict):
+        """
+        Adds new row to (table), using column-value pairs in (body)
+        """
 
+        cols, vals = self._construct_sql_list(body, ", ", mode="separate")
+        query = f"INSERT INTO {table} ({cols}) VALUES ({vals});"
         return self.client.execute(query)
     
-    # TODO the rest etc..
+    def update(self, table, args: dict, body: dict):
+        """
+        Updates rows in (table) that match column-value pairs in (args), using column-value pairs in (body)
+        """
+
+        query = f"UPDATE {table} SET "
+        query += self._construct_sql_list(body, ", ", mode="=")
+        query += f" WHERE "
+        query += self._construct_sql_list(args, " AND ", mode="=")
+        query += ";"
+        return self.client.execute(query)
+    
+    def delete(self, table, args: dict | None):
+        """
+        Deletes rows from (table) that match column-value pairs in (args). 
+        If args is None, then omits the WHERE-clause and deletes all rows in (table)
+        """
+
+        query = f"DELETE FROM {table}"
+        if args:
+            query += " WHERE "
+            query += self._construct_sql_list(args, " AND ", mode="=")
+        query += ";"
+        return self.client.execute(query)
+    
+    # helper functions
+    def _construct_sql_list(self, args: dict, sep: str, mode: str):
+        """
+        Returns either one or two strings of the key-value pairs in (args) joined together using separator (sep).
+        Depending on mode:
+        "="-mode: returns one string "key1=value1(sep)key2=value2(sep)..."
+        "separate"-mode: returns two strings "key1(sep)key2(sep)..." and "value1(sep)value2(sep)..."
+
+        For SQL reasons, non-numeric values are wrapped in quotes, and numeric values aren't 
+        """
+        if mode == "=":
+            items = []
+            for key, value in args.items():
+                if str.isdigit(value):
+                    item = f"{key}={value}"
+                else:
+                    item = f"{key}=\"{value}\""
+                items.append(item)
+            return sep.join(items)
+        elif mode == "separate":
+            keys, values = ([], [])
+            for key, value in args.items():
+                keys.append(key)
+                if str.isdigit(value):
+                    values.append(value)
+                else:
+                    values.append(f"\"{value}\"")
+            return (sep.join(keys), sep.join(values))
+        else:
+            print("mode not recognized")
+            return ""
 
 
 class MySQLAdapter(AdapterI):

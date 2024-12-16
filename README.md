@@ -2,7 +2,8 @@
 
 Assignment for week 10 and 11: fullstack project consisting of a frontend application that users can send API-requests to a database through.
  
-## installation and usage
+ 
+## first-time installation and usage
 
 Start by installing dependencies: from the top-level of project directory, do `pip install -r requirements.txt`
 
@@ -18,10 +19,21 @@ start docker container `docker-compose up`
 
 in a new terminal, change to backend directory `cd backend`
 
+populate the database with some data by running the script `python src/populate_database.py`
+
 start the server with `python src/main.py`, the server should then display the url it is reachable at, such as "http://127.0.0.1:5000"
 
-you can confirm whether you can send HTTP-requests to the server and receive responses by doing `curl "http://127.0.0.1:5000"` in another terminal
+you can confirm whether you can send HTTP-requests to the server and receive responses by using `curl` or `Invoke-WebRequest` in another terminal
 
 ### start frontend
 
 (start frontend)
+
+
+## subsequent usage
+
+start the database container using either `docker-compose up` or the Docker Desktop GUI
+
+start the backend API-server
+
+(start the frontend and access it)

@@ -24,29 +24,15 @@ run mysql db/flask api in docker, react frontend? or flask frontend if too scary
  
  a user should be able to:
  - see a list of products with pictures
- - click on product to shower further details
+ - click on product to show further details
  - add products to and remove products from a cart
  - confirm purchase, where user's info and purchase details are added to database
 
-# timeline
+# todos on timeline
 
-### week 1
+**mon:** X api: crud, X db: populate Products and Properties with dataset, images in ProductImages
 
-**mon:** X get project set up: (db server running, get all (1) items in products table, show in frontend)?
-
-**tues:** db: populate with data, api: CRUD
-
-**wed:** frontend: show prodcts list with pictures, add user ability to add/remove to cart and confirm purchase
-
-**thurs:** api: receive and process user actions
-
-**fri:**
-
-### week 2
-
-**mon:** (figure out later, potentially: security/constraints and maybe auth, testing, CI/CD)
-
-**tues:**
+**tues:** frontend: quick prototype that can interact with api. then make pretty
 
 **wed:**
 

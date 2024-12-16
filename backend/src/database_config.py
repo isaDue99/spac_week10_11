@@ -23,11 +23,11 @@ TABLES = {}
 TABLES['Products'] = (
     "CREATE TABLE `Products` ("
     "   `ID` int NOT NULL AUTO_INCREMENT,"
-    "   `Type` varchar(256) NOT NULL," # arbritrary size limit yay
-    "   `Name` varchar(40) NOT NULL,"
-    "   `Price` float NOT NULL,"
-    "   `Currency` varchar(3) NOT NULL,"
-    "   `Stock` int NOT NULL,"
+    "   `Type` varchar(256)," # arbritrary size limit yay
+    "   `Name` varchar(40),"
+    "   `Price` float,"
+    "   `Currency` varchar(3),"
+    "   `Stock` int,"
     "   PRIMARY KEY (`ID`)"
     ")")
 
@@ -35,7 +35,7 @@ TABLES['Properties'] = (
     "CREATE TABLE `Properties` ("
     "   `ProductID` int NOT NULL,"
     "   `Name` varchar(256) NOT NULL,"
-    "   `Value` varchar(256) NOT NULL,"
+    "   `Value` varchar(256),"
     "   CONSTRAINT PK_Properties PRIMARY KEY (`ProductID`, `Name`),"
     "   FOREIGN KEY (ProductID) REFERENCES Products(ID)"
     ")")
@@ -43,8 +43,8 @@ TABLES['Properties'] = (
 TABLES['ProductImages'] = (
     "CREATE TABLE `ProductImages` ("
     "   `ProductID` int NOT NULL,"
-    "   `Image` blob,"
-    #   no primary key because a single product could conceivably have more than one picture
+    "   `Path` varchar(256) NOT NULL,"
+    "   CONSTRAINT PK_ProductImages PRIMARY KEY (`ProductID`, `Path`),"
     "   FOREIGN KEY (ProductID) REFERENCES Products(ID)"
     ")")
 
