@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Welcome!{% endblock %}
+
+{% block content %}
+
+<div class="two-box">
+    <div id="left">
+        <div id="controls">
+            <form id="filter_prod" action="{{ url_for('index_filter') }}" method="GET">
+                <label for="key">Key: </label>
+                <select name="key">
+                    <option value="ID">ID</option>
+                    <option value="Type">Type</option>
+                    <option value="Name">Name</option>
+                    <option value="Price">Price</option>
+                    <option value="Currency">Currency</option>
+                    <option value="Stock">Stock</option>
+                </select>
+                
+                <label for="value">Value: </label>
+                <input name="value" type="text" maxlength="255" placeholder="Cheerios"/>
+
+                <button>Search</button>
+            </form>
+
+            <!-- <h4>filter on product properties</h4>
+            <form id="filter_prop" action="{{ url_for('index_filter') }}" method="GET">
+                <div>
+                    <label>Key: </label>
+                    <input name="key" type="text" maxlength="255" placeholder="Calories"/>
+                </div>
+                <div>
+                    <label>Value: </label>
+                    <input name="value" type="text" maxlength="255" placeholder="70"/>
+                </div>
+                
+                <button>Search</button>
+            </form> -->
+
+            <p><b>Showing {{ data.__len__() }} products</b></p>
+        </div>
+    </div>
+    
+
+    <div id="right">
+        {% for item in data %}
+            <div class="product-item">
+                <a href="{{ url_for('product', id=item.product[0]) }}">
+                    <img loading="lazy" src="/static/assets/cereals/{{ item.image[1]|e }}">
+                    <h4>{{ item.product[2]|e }}</h4>
+                    <p>{{ item.product[3]|e }} {{ item.product[4]|e }}</p>
+                </a>
+                <button>add to cart</button>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

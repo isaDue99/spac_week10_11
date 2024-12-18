@@ -22,7 +22,7 @@ def main():
     # get connection to db
     db = Database()
 
-    # # load cereal dataset
+    ##### load cereal dataset
     with open(cereal_path, 'r', newline='') as f:
         reader = csv.reader(f, delimiter=";")
 
@@ -42,7 +42,7 @@ def main():
                 }
                 db.create("Properties", data)
             
-    # load image paths from folder
+    ##### load image paths from folder
     img_files = [f for f in os.listdir(images_path) if os.path.isfile(os.path.join(images_path, f))]
 
     for f in img_files:
@@ -62,6 +62,17 @@ def main():
             "Path": f
         }
         db.create("ProductImages", data)
+
+    ##### add some random users
+    data = [
+        {"FirstName": "Cereza", "LastName": "Morpheus"},
+        {"FirstName": "Jeanne", "LastName": "Orpheus"},
+        {"FirstName": "Cheshire", "LastName": "Walrus"}
+    ]
+
+    for guy in data:
+        db.create("Customers", guy)
+
     return
 
 

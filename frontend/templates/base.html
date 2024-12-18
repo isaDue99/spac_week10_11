@@ -1,0 +1,36 @@
+<!-- basic shape of webpage -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="/static/funcs.js"></script>
+    <title>CerealShop - {% block title %}{% endblock %}</title>
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <h1>CerealShop Ltd. ApS</h1>
+        <a href="{{ url_for('index') }}">home</a>
+        <a href="{{ url_for('profile') }}">profile</a>
+        <a href="{{ url_for('cart') }}">cart</a>
+        <hr>
+    </header>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="footer">
+        {% block footer %}
+        <hr>
+        <p>Page fetched at... <time id="fetched">(time)</time></p>
+        {% endblock %}
+    </div>
+</body>
+
+<script>
+    const rn = new Date(Date.now());
+    document.getElementById("fetched").innerText = rn;
+</script>
+</html>

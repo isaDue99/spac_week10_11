@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}{{ product[0][2]|e }}{% endblock %}
+
+{% block content %}
+<div class="two-box">
+    <div id="left">
+        <div id="controls">
+        </div>
+    </div>
+    
+
+    <div id="right">
+        <div id="image-showcase">
+            {% for item in images %}
+                <img src="/static/assets/cereals/{{ item[1]|e }}">
+            {% endfor %}
+        </div>
+        
+
+        <div>
+            <h2>{{ product[0][2]|e }}</h2>
+            <p class="small">{{ product[0][1]|e }}</p>
+
+            <br>
+
+            <p id="price">{{ product[0][3]|e }} {{ product[0][4]|e }}</p>
+            <P class="small">In stock: {{ product[0][5]|e }}</P>
+
+            <button>add to cart</button>
+        </div>
+
+        <div id="details">
+            <h2>Details</h2>
+            <ul>
+                {% for item in properties %}
+                <li>{{ item[1]|e }}: {{ item[2]|e }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        
+    </div>
+</div>
+{% endblock %}

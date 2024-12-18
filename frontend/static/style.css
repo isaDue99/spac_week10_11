@@ -1,0 +1,59 @@
+
+body {
+    max-width: 70vw;
+    margin: auto;
+}
+
+#right {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+#right div, #left div {
+    flex-grow: 1;
+    padding: 1em;
+}
+
+
+/* index.html */
+
+.product-item {
+    width: 11vw;
+    max-width: 11vw;
+    border-radius: 1em;
+    border: 2px solid lightgray;
+}
+
+.product-item img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: scale-down;
+}
+
+
+/* product.html */
+
+#price {
+    font-weight: bold;
+}
+
+.small {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#image-showcase {
+    flex-grow: 1;
+}
+
+#image-showcase img {
+    display: block;
+    margin: auto;
+    height: 100%;
+    max-width: 100%;
+}
+
+#details ul {
+    list-style: none;
+    padding-left: 0;
+}

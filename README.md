@@ -17,23 +17,24 @@ start docker container `docker-compose up`
 
 ### start api
 
-in a new terminal, change to backend directory `cd backend`
+in a new terminal, change to backend's source directory `cd backend/src`
 
-populate the database with some data by running the script `python src/populate_database.py`
+populate the database with some data by running the script `python populate_database.py`
 
-start the server with `python src/main.py`, the server should then display the url it is reachable at, such as "http://127.0.0.1:5000"
+start the server with `python main.py`, the server should then display the url it is reachable at, such as "http://127.0.0.1:5000"
+(or start the server in debug mode with `flask --app main run --debug`)
 
 you can confirm whether you can send HTTP-requests to the server and receive responses by using `curl` or `Invoke-WebRequest` in another terminal
 
 ### start frontend
 
-(start frontend)
+in a new terminal, change to frontend directory `cd frontend`
 
+since port 5000 is already in use by the backend, start the frontend with `flask --app main run -p 3000` (or another port number, if 3000 is already in use) (and optionally include `--debug` to run it in debug mode)
+the server should now display the url it is reachable at, such as "http://127.0.0.1:3000", open this link in your browser
 
 ## subsequent usage
 
 start the database container using either `docker-compose up` or the Docker Desktop GUI
 
-start the backend API-server
-
-(start the frontend and access it)
+start the backend API-server, and start the frontend GUI-server

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="two-box">
+    <div id="left">
+        <div id="controls">
+            <form id="profile-select">
+                <label>Select profile:</label>
+                <select name="profile" onchange="changeUser(this)">
+                    {% for guy in customers %}
+                    <option value="{{ guy[0]|e }}">{{ guy[1]|e }}</option>
+                    {% endfor %}
+                </select>
+            </form>   
+        </div>
+    </div>
+    
+
+    <div id="right">
+        <div>
+            <h2>Profile</h2>
+            <p>(info about currently selected customer)</p>
+        </div>
+        
+
+        <!-- {{ customers }} -->
+    </div>
+</div>
+{% endblock %}

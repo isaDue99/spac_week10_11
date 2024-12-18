@@ -5,6 +5,7 @@ from database import Database
 from flask import Flask, json, request
 
 api = Flask(__name__)
+conn = Database()
 
 ### Pseudo-code overview of routes:
 #   GET       /<table>                        = find_all()
@@ -25,7 +26,7 @@ def create_in_table(table: str):
     Request-body must contain a dict-like JSON object with keys corresponding to the names of the columns in the table's schema
     """
     body = request.json
-    payload = Database().create(table, body)
+    payload = conn.create(table, body)
     return json_response(payload)
 
 
@@ -33,7 +34,7 @@ def create_in_table(table: str):
 @api.route("/<string:table>", methods=["GET"])
 def read_table(table: str):
     """Get all rows in table"""
-    payload = Database().get_table(table)
+    payload = conn.get_table(table)
     return json_response(payload)
 
 @api.route("/<string:table>/<int:id>", methods=["GET"])
@@ -42,14 +43,14 @@ def read_table_id(table: str, id: int):
     Shortcut for "/(table)/where?ID=(id)"
     """
     args = {"ID": str(id)}
-    payload = Database().find_by_params(table, args)
+    payload = conn.find_by_params(table, args)
     return json_response(payload)
 
 @api.route("/<string:table>/where", methods=["GET"])
 def read_table_where(table: str):
     """Get rows in table that match the query string key=value pairs. e.g. get Products/where?Stock=15&Currency=DKK"""
     args = request.args.to_dict()
-    payload = Database().find_by_params(table, args)
+    payload = conn.find_by_params(table, args)
     return json_response(payload)
 
 
@@ -63,7 +64,7 @@ def update_in_table(table: str):
     """
     args = request.args.to_dict()
     body = request.json
-    payload = Database().update(table, args, body)
+    payload = conn.update(table, args, body)
     return json_response(payload)
 
 
@@ -71,14 +72,14 @@ def update_in_table(table: str):
 @api.route("/<string:table>", methods=["DELETE"])
 def delete_all_in_table(table: str):
     """Deletes all rows in table"""
-    payload = Database().delete(table, None)
+    payload = conn.delete(table, None)
     return json_response(payload, status=204)
 
 @api.route("/<string:table>/where", methods=["DELETE"])
 def delete_in_table(table: str):
     """Deletes row from table that match the query string"""
     args = request.args.to_dict()
-    payload = Database().delete(table, args)
+    payload = conn.delete(table, args)
     return json_response(payload, status=204)
 
 

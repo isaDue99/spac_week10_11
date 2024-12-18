@@ -32,11 +32,11 @@ run mysql db/flask api in docker, react frontend? or flask frontend if too scary
 
 **mon:** X api: crud, X db: populate Products and Properties with dataset, images in ProductImages
 
-**tues:** frontend: quick prototype that can interact with api. then make pretty
+**tues:** X smiles
 
-**wed:**
+**wed:** / frontend: quick prototype that can interact with api. then make pretty
 
-**thurs:** make powerpoint !!
+**thurs:** frontend: user selection and add to cart, backend: make search/finding better with logic operators and stuff?, db: vary input data a bit in currencies and stock amounts etc, make powerpoint !!
 
 **fri:** presentation of powerpoint showcasing the project
 
