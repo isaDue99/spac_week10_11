@@ -102,17 +102,32 @@ def product(id: int):
 
 @app.route('/cart', methods=["GET"])
 def cart():
-    # clickin on cart -> /cart = products and their quantities for this customer's order, 
-    #   button to cancel order (deletes order non-db storage (cookie?)), 
-    #   button to place order (save in db and reset non-db storage so a new order can b placed)
-
-    ### get cart info
-    # get user's currently selected customerID and that customer's current order (not found in database, its only put there once purchase is confirmed)
-    # saved as a cookie?
-
-    # get details of products in the order
+    # clickin on cart -> /cart = products and their quantities for this customer's order
 
     return render_template('cart.html')
+
+@app.route('/cart', methods=["POST"])
+def cart_purchase():
+    # get cart info
+    body = request.json
+
+    # create order in backend, get orderID from that
+    data = {"CustomerID": str(body.get("CustomerID"))}
+    res = rq.post(f"{backend}/Orders", json=data)
+    order_id = res.json()
+
+    # create OrderDetails for each product
+    for item in body.get("Cart"):
+        data = {
+            "OrderID": str(order_id),
+            "ProductID": str(item.get("ProductID")),
+            "Quantity": str(item.get("Quantity"))
+        }
+        res = rq.post(f"{backend}/OrderDetails", json=data)
+
+    # (should also detract order quantities from stock in Products table but omgfuck that)
+
+    return redirect(url_for('index'))
 
 @app.route('/profile', methods=["GET"])
 def profile():

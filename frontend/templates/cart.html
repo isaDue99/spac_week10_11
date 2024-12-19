@@ -10,7 +10,22 @@
     
 
     <div id="right">
-        <p>(cart info)</p>
+        <div id="cart">
+            <h2 id="cart-title">Your cart</h2>
+            <ul id="cart-items">
+                <li>(Empty!)</li>
+            </ul>
+
+            <div>
+                <button onclick="constructCart()">Update cart</button>
+                <button onclick="resetCart()">Cancel</button>
+                <button onclick="confirmCart()">Confirm purchase</button>
+            </div>
+        </div>
     </div>
+
+    <script>
+        loadCart();
+    </script>
 </div>
 {% endblock %}

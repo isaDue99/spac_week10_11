@@ -34,9 +34,9 @@ run mysql db/flask api in docker, react frontend? or flask frontend if too scary
 
 **tues:** X smiles
 
-**wed:** / frontend: quick prototype that can interact with api. then make pretty
+**wed:** X frontend: quick prototype that can interact with api. then make pretty
 
-**thurs:** frontend: user selection and add to cart, backend: make search/finding better with logic operators and stuff?, db: vary input data a bit in currencies and stock amounts etc, make powerpoint !!
+**thurs:** X frontend: user selection and add to cart, backend: make search/finding better with logic operators and stuff?, X db: vary input data a bit in currencies and stock amounts etc, make powerpoint !!
 
 **fri:** presentation of powerpoint showcasing the project
 
@@ -49,3 +49,8 @@ backend/main.py starts a server listening on endpoints defined in backend/api.py
 https://www.fullstackpython.com/react.html
 https://developer.okta.com/blog/2018/12/20/crud-app-with-python-flask-react
 https://flask.palletsprojects.com/en/stable/patterns/javascript/
+
+# (notes to self) example requests to backend
+POST: `invoke-webrequest -Method "POST" -Uri "http://127.0.0.1:5000/Orders" -Body '{"CustomerID": "1"}' -ContentType "application/json"`
+
+GET: `invoke-webrequest "http://127.0.0.1:5000/Orders"`

@@ -1,77 +1,77 @@
-1;Cereal;100% Bran;9.99;DKK;10;70;4;1;130;10;5;6;280;25;100
-2;Cereal;100% Natural Bran;9.99;DKK;10;120;3;5;15;2;8;8;135;0;100
-3;Cereal;All-Bran;9.99;DKK;10;70;4;1;260;9;7;5;320;25;100
-4;Cereal;All-Bran with Extra Fiber;9.99;DKK;10;50;4;0;140;14;8;0;330;25;100
-5;Cereal;Almond Delight;9.99;DKK;10;110;2;2;200;1;14;8;-1;25;100
-6;Cereal;Apple Cinnamon Cheerios;9.99;DKK;10;110;2;2;180;1.5;10.5;10;70;25;100
-7;Cereal;Apple Jacks;9.99;DKK;10;110;2;0;125;1;11;14;30;25;100
-8;Cereal;Basic 4;9.99;DKK;10;130;3;2;210;2;18;8;100;25;100
-9;Cereal;Bran Chex;9.99;DKK;10;90;2;1;200;4;15;6;125;25;100
-10;Cereal;Bran Flakes;9.99;DKK;10;90;3;0;210;5;13;5;190;25;100
-11;Cereal;Cap'n'Crunch;9.99;DKK;10;120;1;2;220;0;12;12;35;25;100
-12;Cereal;Cheerios;9.99;DKK;10;110;6;2;290;2;17;1;105;25;100
-13;Cereal;Cinnamon Toast Crunch;9.99;DKK;10;120;1;3;210;0;13;9;45;25;100
-14;Cereal;Clusters;9.99;DKK;10;110;3;2;140;2;13;7;105;25;100
-15;Cereal;Cocoa Puffs;9.99;DKK;10;110;1;1;180;0;12;13;55;25;100
-16;Cereal;Corn Chex;9.99;DKK;10;110;2;0;280;0;22;3;25;25;100
-17;Cereal;Corn Flakes;9.99;DKK;10;100;2;0;290;1;21;2;35;25;100
-18;Cereal;Corn Pops;9.99;DKK;10;110;1;0;90;1;13;12;20;25;100
-19;Cereal;Count Chocula;9.99;DKK;10;110;1;1;180;0;12;13;65;25;100
-20;Cereal;Cracklin' Oat Bran;9.99;DKK;10;110;3;3;140;4;10;7;160;25;100
-21;Cereal;Cream of Wheat (Quick);9.99;DKK;10;100;3;0;80;1;21;0;-1;0;100
-22;Cereal;Crispix;9.99;DKK;10;110;2;0;220;1;21;3;30;25;100
-23;Cereal;Crispy Wheat & Raisins;9.99;DKK;10;100;2;1;140;2;11;10;120;25;100
-24;Cereal;Double Chex;9.99;DKK;10;100;2;0;190;1;18;5;80;25;100
-25;Cereal;Froot Loops;9.99;DKK;10;110;2;1;125;1;11;13;30;25;100
-26;Cereal;Frosted Flakes;9.99;DKK;10;110;1;0;200;1;14;11;25;25;100
-27;Cereal;Frosted Mini-Wheats;9.99;DKK;10;100;3;0;0;3;14;7;100;25;100
-28;Cereal;Fruit & Fibre Dates, Walnuts, and Oats;9.99;DKK;10;120;3;2;160;5;12;10;200;25;100
-29;Cereal;Fruitful Bran;9.99;DKK;10;120;3;0;240;5;14;12;190;25;100
-30;Cereal;Fruity Pebbles;9.99;DKK;10;110;1;1;135;0;13;12;25;25;100
-31;Cereal;Golden Crisp;9.99;DKK;10;100;2;0;45;0;11;15;40;25;100
-32;Cereal;Golden Grahams;9.99;DKK;10;110;1;1;280;0;15;9;45;25;100
-33;Cereal;Grape Nuts Flakes;9.99;DKK;10;100;3;1;140;3;15;5;85;25;100
-34;Cereal;Grape-Nuts;9.99;DKK;10;110;3;0;170;3;17;3;90;25;100
-35;Cereal;Great Grains Pecan;9.99;DKK;10;120;3;3;75;3;13;4;100;25;100
-36;Cereal;Honey Graham Ohs;9.99;DKK;10;120;1;2;220;1;12;11;45;25;100
-37;Cereal;Honey Nut Cheerios;9.99;DKK;10;110;3;1;250;1.5;11.5;10;90;25;100
-38;Cereal;Honey-comb;9.99;DKK;10;110;1;0;180;0;14;11;35;25;100
-39;Cereal;Just Right Crunchy Nuggets;9.99;DKK;10;110;2;1;170;1;17;6;60;100;100
-40;Cereal;Just Right Fruit & Nut;9.99;DKK;10;140;3;1;170;2;20;9;95;100;100
-41;Cereal;Kix;9.99;DKK;10;110;2;1;260;0;21;3;40;25;100
-42;Cereal;Life;9.99;DKK;10;100;4;2;150;2;12;6;95;25;100
-43;Cereal;Lucky Charms;9.99;DKK;10;110;2;1;180;0;12;12;55;25;100
+1;Cereal;100% Bran;10.75;SEK;15;70;4;1;130;10;5;6;280;25;500
+2;Cereal;100% Natural Bran;20.50;DKK;1;120;3;5;15;2;8;8;135;0;250
+3;Cereal;All-Bran;2.95;DKK;1;70;4;1;260;9;7;5;320;25;250
+4;Cereal;All-Bran with Extra Fiber;2.95;SEK;15;50;4;0;140;14;8;0;330;25;100
+5;Cereal;Almond Delight;10.75;NOK;10;110;2;2;200;1;14;8;-1;25;100
+6;Cereal;Apple Cinnamon Cheerios;9.99;SEK;15;110;2;2;180;1.5;10.5;10;70;25;500
+7;Cereal;Apple Jacks;2.95;SEK;10;110;2;0;125;1;11;14;30;25;500
+8;Cereal;Basic 4;20.50;DKK;1;130;3;2;210;2;18;8;100;25;250
+9;Cereal;Bran Chex;10.75;SEK;1;90;2;1;200;4;15;6;125;25;250
+10;Cereal;Bran Flakes;12;NOK;15;90;3;0;210;5;13;5;190;25;100
+11;Cereal;Cap'n'Crunch;9.99;DKK;15;120;1;2;220;0;12;12;35;25;100
+12;Cereal;Cheerios;20.50;DKK;10;110;6;2;290;2;17;1;105;25;500
+13;Cereal;Cinnamon Toast Crunch;2.95;DKK;1;120;1;3;210;0;13;9;45;25;100
+14;Cereal;Clusters;10.75;NOK;1;110;3;2;140;2;13;7;105;25;500
+15;Cereal;Cocoa Puffs;9.99;DKK;1;110;1;1;180;0;12;13;55;25;500
+16;Cereal;Corn Chex;9.99;SEK;10;110;2;0;280;0;22;3;25;25;500
+17;Cereal;Corn Flakes;12;SEK;10;100;2;0;290;1;21;2;35;25;500
+18;Cereal;Corn Pops;9.99;NOK;10;110;1;0;90;1;13;12;20;25;500
+19;Cereal;Count Chocula;10.75;DKK;1;110;1;1;180;0;12;13;65;25;250
+20;Cereal;Cracklin' Oat Bran;10.75;DKK;1;110;3;3;140;4;10;7;160;25;250
+21;Cereal;Cream of Wheat (Quick);10.75;NOK;10;100;3;0;80;1;21;0;-1;0;100
+22;Cereal;Crispix;12;NOK;10;110;2;0;220;1;21;3;30;25;100
+23;Cereal;Crispy Wheat & Raisins;2.95;DKK;10;100;2;1;140;2;11;10;120;25;500
+24;Cereal;Double Chex;9.99;DKK;15;100;2;0;190;1;18;5;80;25;250
+25;Cereal;Froot Loops;2.95;SEK;10;110;2;1;125;1;11;13;30;25;100
+26;Cereal;Frosted Flakes;12;NOK;1;110;1;0;200;1;14;11;25;25;250
+27;Cereal;Frosted Mini-Wheats;9.99;DKK;1;100;3;0;0;3;14;7;100;25;100
+28;Cereal;Fruit & Fibre Dates, Walnuts, and Oats;20.50;DKK;10;120;3;2;160;5;12;10;200;25;500
+29;Cereal;Fruitful Bran;9.99;NOK;10;120;3;0;240;5;14;12;190;25;250
+30;Cereal;Fruity Pebbles;2.95;SEK;15;110;1;1;135;0;13;12;25;25;500
+31;Cereal;Golden Crisp;9.99;DKK;15;100;2;0;45;0;11;15;40;25;500
+32;Cereal;Golden Grahams;10.75;SEK;15;110;1;1;280;0;15;9;45;25;500
+33;Cereal;Grape Nuts Flakes;2.95;SEK;15;100;3;1;140;3;15;5;85;25;500
+34;Cereal;Grape-Nuts;20.50;DKK;15;110;3;0;170;3;17;3;90;25;250
+35;Cereal;Great Grains Pecan;10.75;SEK;10;120;3;3;75;3;13;4;100;25;250
+36;Cereal;Honey Graham Ohs;2.95;DKK;1;120;1;2;220;1;12;11;45;25;250
+37;Cereal;Honey Nut Cheerios;9.99;NOK;1;110;3;1;250;1.5;11.5;10;90;25;100
+38;Cereal;Honey-comb;12;DKK;1;110;1;0;180;0;14;11;35;25;100
+39;Cereal;Just Right Crunchy Nuggets;2.95;NOK;10;110;2;1;170;1;17;6;60;100;500
+40;Cereal;Just Right Fruit & Nut;10.75;DKK;15;140;3;1;170;2;20;9;95;100;250
+41;Cereal;Kix;20.50;EUR;15;110;2;1;260;0;21;3;40;25;250
+42;Cereal;Life;20.50;EUR;15;100;4;2;150;2;12;6;95;25;100
+43;Cereal;Lucky Charms;9.99;DKK;15;110;2;1;180;0;12;12;55;25;100
 44;Cereal;Maypo;9.99;DKK;10;100;4;1;0;0;16;3;95;25;100
-45;Cereal;Muesli Raisins, Dates, & Almonds;9.99;DKK;10;150;4;3;95;3;16;11;170;25;100
-46;Cereal;Muesli Raisins, Peaches, & Pecans;9.99;DKK;10;150;4;3;150;3;16;11;170;25;100
-47;Cereal;Mueslix Crispy Blend;9.99;DKK;10;160;3;2;150;3;17;13;160;25;100
-48;Cereal;Multi-Grain Cheerios;9.99;DKK;10;100;2;1;220;2;15;6;90;25;100
-49;Cereal;Nut&Honey Crunch;9.99;DKK;10;120;2;1;190;0;15;9;40;25;100
-50;Cereal;Nutri-Grain Almond-Raisin;9.99;DKK;10;140;3;2;220;3;21;7;130;25;100
-51;Cereal;Nutri-grain Wheat;9.99;DKK;10;90;3;0;170;3;18;2;90;25;100
-52;Cereal;Oatmeal Raisin Crisp;9.99;DKK;10;130;3;2;170;1.5;13.5;10;120;25;100
-53;Cereal;Post Nat, Raisin Bran;9.99;DKK;10;120;3;1;200;6;11;14;260;25;100
-54;Cereal;Product 19;9.99;DKK;10;100;3;0;320;1;20;3;45;100;100
-55;Cereal;Puffed Rice;9.99;DKK;10;50;1;0;0;0;13;0;15;0;100
-56;Cereal;Puffed Wheat;9.99;DKK;10;50;2;0;0;1;10;0;50;0;100
-57;Cereal;Quaker Oat Squares;9.99;DKK;10;100;4;1;135;2;14;6;110;25;100
-58;Cereal;Quaker Oatmeal;9.99;DKK;10;100;5;2;0;2.7;-1;-1;110;0;100
-59;Cereal;Raisin Bran;9.99;DKK;10;120;3;1;210;5;14;12;240;25;100
-60;Cereal;Raisin Nut Bran;9.99;DKK;10;100;3;2;140;2.5;10.5;8;140;25;100
-61;Cereal;Raisin Squares;9.99;DKK;10;90;2;0;0;2;15;6;110;25;100
-62;Cereal;Rice Chex;9.99;DKK;10;110;1;0;240;0;23;2;30;25;100
-63;Cereal;Rice Krispies;9.99;DKK;10;110;2;0;290;0;22;3;35;25;100
-64;Cereal;Shredded Wheat;9.99;DKK;10;80;2;0;0;3;16;0;95;0;100
-65;Cereal;Shredded Wheat'n'Bran;9.99;DKK;10;90;3;0;0;4;19;0;140;0;100
-66;Cereal;Shredded Wheat spoon size;9.99;DKK;10;90;3;0;0;3;20;0;120;0;100
-67;Cereal;Smacks;9.99;DKK;10;110;2;1;70;1;9;15;40;25;100
-68;Cereal;Special K;9.99;DKK;10;110;6;0;230;1;16;3;55;25;100
-69;Cereal;Strawberry Fruit Wheats;9.99;DKK;10;90;2;0;15;3;15;5;90;25;100
-70;Cereal;Total Corn Flakes;9.99;DKK;10;110;2;1;200;0;21;3;35;100;100
-71;Cereal;Total Raisin Bran;9.99;DKK;10;140;3;1;190;4;15;14;230;100;100
-72;Cereal;Total Whole Grain;9.99;DKK;10;100;3;1;200;3;16;3;110;100;100
-73;Cereal;Triples;9.99;DKK;10;110;2;1;250;0;21;3;60;25;100
-74;Cereal;Trix;9.99;DKK;10;110;1;1;140;0;13;12;25;25;100
-75;Cereal;Wheat Chex;9.99;DKK;10;100;3;1;230;3;17;3;115;25;100
-76;Cereal;Wheaties;9.99;DKK;10;100;3;1;200;3;17;3;110;25;100
-77;Cereal;Wheaties Honey Gold;9.99;DKK;10;110;2;1;200;1;16;8;60;25;100
+45;Cereal;Muesli Raisins, Dates, & Almonds;10.75;NOK;10;150;4;3;95;3;16;11;170;25;250
+46;Cereal;Muesli Raisins, Peaches, & Pecans;10.75;DKK;1;150;4;3;150;3;16;11;170;25;500
+47;Cereal;Mueslix Crispy Blend;2.95;EUR;1;160;3;2;150;3;17;13;160;25;500
+48;Cereal;Multi-Grain Cheerios;9.99;DKK;15;100;2;1;220;2;15;6;90;25;100
+49;Cereal;Nut&Honey Crunch;9.99;NOK;10;120;2;1;190;0;15;9;40;25;250
+50;Cereal;Nutri-Grain Almond-Raisin;9.99;EUR;10;140;3;2;220;3;21;7;130;25;250
+51;Cereal;Nutri-grain Wheat;2.95;EUR;15;90;3;0;170;3;18;2;90;25;100
+52;Cereal;Oatmeal Raisin Crisp;20.50;NOK;15;130;3;2;170;1.5;13.5;10;120;25;100
+53;Cereal;Post Nat, Raisin Bran;12;DKK;15;120;3;1;200;6;11;14;260;25;500
+54;Cereal;Product 19;2.95;DKK;1;100;3;0;320;1;20;3;45;100;500
+55;Cereal;Puffed Rice;12;DKK;10;50;1;0;0;0;13;0;15;0;100
+56;Cereal;Puffed Wheat;10.75;EUR;1;50;2;0;0;1;10;0;50;0;100
+57;Cereal;Quaker Oat Squares;10.75;DKK;10;100;4;1;135;2;14;6;110;25;500
+58;Cereal;Quaker Oatmeal;10.75;EUR;15;100;5;2;0;2.7;-1;-1;110;0;250
+59;Cereal;Raisin Bran;9.99;EUR;15;120;3;1;210;5;14;12;240;25;100
+60;Cereal;Raisin Nut Bran;9.99;DKK;15;100;3;2;140;2.5;10.5;8;140;25;500
+61;Cereal;Raisin Squares;10.75;EUR;15;90;2;0;0;2;15;6;110;25;100
+62;Cereal;Rice Chex;20.50;NOK;10;110;1;0;240;0;23;2;30;25;100
+63;Cereal;Rice Krispies;9.99;NOK;1;110;2;0;290;0;22;3;35;25;250
+64;Cereal;Shredded Wheat;12;DKK;1;80;2;0;0;3;16;0;95;0;250
+65;Cereal;Shredded Wheat'n'Bran;20.50;EUR;1;90;3;0;0;4;19;0;140;0;100
+66;Cereal;Shredded Wheat spoon size;9.99;DKK;10;90;3;0;0;3;20;0;120;0;500
+67;Cereal;Smacks;9.99;EUR;10;110;2;1;70;1;9;15;40;25;500
+68;Cereal;Special K;10.75;USD;15;110;6;0;230;1;16;3;55;25;500
+69;Cereal;Strawberry Fruit Wheats;9.99;USD;15;90;2;0;15;3;15;5;90;25;500
+70;Cereal;Total Corn Flakes;20.50;DKK;1;110;2;1;200;0;21;3;35;100;500
+71;Cereal;Total Raisin Bran;12;NOK;15;140;3;1;190;4;15;14;230;100;100
+72;Cereal;Total Whole Grain;12;DKK;10;100;3;1;200;3;16;3;110;100;250
+73;Cereal;Triples;2.95;USD;10;110;2;1;250;0;21;3;60;25;100
+74;Cereal;Trix;10.75;NOK;1;110;1;1;140;0;13;12;25;25;100
+75;Cereal;Wheat Chex;10.75;USD;10;100;3;1;230;3;17;3;115;25;250
+76;Cereal;Wheaties;9.99;USD;10;100;3;1;200;3;17;3;110;25;500
+77;Cereal;Wheaties Honey Gold;2.95;NOK;15;110;2;1;200;1;16;8;60;25;250

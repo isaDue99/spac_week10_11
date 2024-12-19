@@ -9,7 +9,7 @@
                 <label>Select profile:</label>
                 <select name="profile" onchange="changeUser(this)">
                     {% for guy in customers %}
-                    <option value="{{ guy[0]|e }}">{{ guy[1]|e }}</option>
+                    <option id="option-{{ guy[0]|e }}" value='{"CustomerID": "{{ guy[0]|e }}", "FirstName": "{{ guy[1]|e }}", "LastName": "{{ guy[2]|e }}"}'>{{ guy[1]|e }}</option>
                     {% endfor %}
                 </select>
             </form>   
@@ -20,11 +20,14 @@
     <div id="right">
         <div>
             <h2>Profile</h2>
-            <p>(info about currently selected customer)</p>
+            <p>ID: <span id="customer-id">(no profile selected)</span></p>
+            <p>Name: <span id="customer-first">(no profile selected)</span> <span id="customer-last"></span></p>
         </div>
-        
-
-        <!-- {{ customers }} -->
+        <!-- a list of past orders would go so hard here -->
     </div>
+
+    <script>
+        loadProfile();
+    </script>
 </div>
 {% endblock %}

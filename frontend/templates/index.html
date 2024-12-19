@@ -45,12 +45,12 @@
     <div id="right">
         {% for item in data %}
             <div class="product-item">
-                <a href="{{ url_for('product', id=item.product[0]) }}">
+                <a href="{{ url_for('product', id=item.product[0]|e) }}">
                     <img loading="lazy" src="/static/assets/cereals/{{ item.image[1]|e }}">
                     <h4>{{ item.product[2]|e }}</h4>
                     <p>{{ item.product[3]|e }} {{ item.product[4]|e }}</p>
                 </a>
-                <button>add to cart</button>
+                <button onclick="add1ToCart(this)" value='{"ProductID": "{{ item.product[0]|e }}", "Name": "{{ item.product[2]|e }}" }'>Add to cart</button>
             </div>
         {% endfor %}
     </div>

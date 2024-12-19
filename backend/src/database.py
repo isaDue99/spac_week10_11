@@ -24,7 +24,7 @@ class AdapterI:
         pass
 
     def execute(self, query):
-        """Executes (and commits) the SQL statement"""
+        """Executes (and commits) the SQL statement. Returns last row ID if relevant on INSERT and UPDATE operations"""
         pass
 
 
@@ -205,5 +205,7 @@ class MySQLAdapter(AdapterI):
     def execute(self, query):
         cur = self.conn.cursor()
         cur.execute(query)
+        last_id = cur.lastrowid
         self.conn.commit()
         cur.close()
+        return last_id
