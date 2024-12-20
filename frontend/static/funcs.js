@@ -88,13 +88,17 @@ function confirmCart() {
             }),
             headers: {
               "Content-type": "application/json",
-            },
+            }
           });
 
     // reset cart
-    resetCart();
+    localStorage.removeItem("cart");
 
-    location.href = "http://127.0.0.1:3000";
+    // on slow connections redirecting fucks fetch up
+    // fix: wait 1 second
+    setTimeout(function redir() {
+        location.href = "http://127.0.0.1:3000";
+    }, 1000);
 }
 
 function remove1FromCart(id) {
